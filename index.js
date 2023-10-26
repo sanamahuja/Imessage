@@ -11,7 +11,29 @@ app.use(express.urlencoded({ extended: true }));
 app.use(cors());
 
 app.use('/receiveMessage', (req, res) => {
-    console.log(req.body);
+    console.log(req.headers,req.body);
+    console.log(req)
+     axios
+        .post(
+            url,
+            {
+                number: "+918368962485",
+                content: "Hello world!",
+            },
+            {
+                headers: {
+                    "sb-api-key-id": "1a06e1b4bf99aaf7f406242a14e20c52",
+                    "sb-api-secret-key": "bb93482e564390d8689b06d4c4e1ef59",
+                    "content-type": "application/json",
+                },
+            }
+        )
+        .then((response) => {
+            console.log(response.data);
+        })
+        .catch((error) => {
+            console.error(error);
+        });
     res.json({ status: 'ok' });
 });
 app.use('/postMessage', (req, res) => {
